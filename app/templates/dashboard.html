@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Secure Messaging{% endblock %}
+{% block content %}
+<div class="dashboard">
+  <header class="dashboard-header">
+    <div>
+      <h1>Secure Messaging Dashboard</h1>
+      <p class="dashboard-user">Signed in as <strong>{{ user_email }}</strong></p>
+    </div>
+    <button id="logout-button" type="button">Log out</button>
+  </header>
+
+  <div class="dashboard-grid">
+    <section class="card">
+      <h2>Send a message</h2>
+      <form id="send-form" novalidate>
+        <label for="recipient">Recipient email</label>
+        <input type="email" id="recipient" name="recipient" autocomplete="off" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <p id="send-error" class="form-error" hidden></p>
+        <p id="send-success" class="form-success" hidden></p>
+
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Inbox</h2>
+      <p id="inbox-error" class="form-error" hidden></p>
+      <p id="inbox-empty" class="dashboard-placeholder" hidden>No messages yet.</p>
+      <ul id="inbox-list" class="inbox-list"></ul>
+    </section>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', path='js/auth.js') }}" defer></script>
+<script src="{{ url_for('static', path='js/dashboard.js') }}" defer></script>
+{% endblock %}
